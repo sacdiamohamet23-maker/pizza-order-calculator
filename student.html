@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Order Calculator</title>
+  <style>
+    body { font-family: Arial; background:#f2f2f2; }
+    .box {
+      width: 320px; background:#fff; margin:50px auto;
+      padding:20px; border-radius:8px;
+    }
+    input, select, button {
+      width:100%; padding:8px; margin-top:8px;
+    }
+    button { background:#007bff; color:#fff; border:none; }
+    #result { margin-top:15px; font-weight:bold; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h3>Student Order Calculator</h3>
+
+  <input type="text" id="name" placeholder="Student Name">
+
+  <select id="item">
+    <option value="">Select Item</option>
+    <option value="5">Burger ($5)</option>
+    <option value="3">Juice ($3)</option>
+    <option value="2">Water ($2)</option>
+  </select>
+
+  <input type="number" id="qty" placeholder="Quantity">
+
+  <button id="calcBtn">Calculate</button>
+
+  <div id="result"></div>
+</div>
+
+<script>
+  document.getElementById("calcBtn").addEventListener("click", function () {
+    const name = document.getElementById("name").value;
+    const price = Number(document.getElementById("item").value);
+    const qty = Number(document.getElementById("qty").value);
+
+    if (name === "" || price === 0 || qty <= 0) {
+      document.getElementById("result").innerHTML =
+        "<span style='color:red'>Please fill all fields correctly</span>";
+      return;
+    }
+
+    const total = price * qty;
+
+    document.getElementById("result").innerHTML =
+      "Student: " + name + "<br>Total Price: $" + total;
+  });
+</script>
+
+</body>
+</html>
+</body>
+</html>
