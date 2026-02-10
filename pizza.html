@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Order Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+        }
+
+        .container {
+            background: rgb(250, 245, 245);
+            width: 340px;
+            margin: 50px auto;
+            padding: 20px;  
+            border-radius: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2881a7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1e7e34;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Pizza Order Calculator</h2>
+
+    <input type="text" id="customerName" placeholder="Enter your name">
+
+    <label>Pizza Size</label>
+    <select id="size">
+        <option value="">Select size</option>
+        <option value="8">Small ($8)</option>
+        <option value="12">Medium ($12)</option>
+        <option value="16">Large ($16)</option>
+    </select>
+
+    <label>Toppings ($2 each)</label>
+    <input type="checkbox" value="Cheese" class="topping"> Extra Cheese  
+    <input type="checkbox" value="Mushroom" class="topping"> Mushroom  
+    <input type="checkbox" value="Pepperoni" class="topping"> Pepperoni  
+
+    <label>Quantity</label>
+    <input type="number" id="quantity" placeholder="Enter quantity">
+
+    <button onclick="calculateOrder()">Calculate Order</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateOrder() {
+        const name = document.getElementById("customerName").value;
+        const sizePrice = Number(document.getElementById("size").value);
+        const quantity = Number(document.getElementById("quantity").value);
+
+        const toppingElements = document.querySelectorAll(".topping");
+        let selectedToppings = [];
+
+        toppingElements.forEach(topping => {
+            if (topping.checked) {
+                selectedToppings.push(topping.value);
+            }
+        });
+
+        // Input validation
+        if (name === "" || sizePrice === 0 || quantity <= 0) {
+            document.getElementById("result").innerHTML =
+                "<span style='color:red'>Please fill all fields correctly!</span>";
+            return;
+        }
+
+        const toppingsPrice = selectedToppings.length * 2;
+        const totalPrice = (sizePrice + toppingsPrice) * quantity;
+
+        document.getElementById("result").innerHTML =
+            `Customer: ${name}<br>
+             Size Price: $${sizePrice}<br>
+             Toppings: ${selectedToppings.join(", ") || "None"}<br>
+             Quantity: ${quantity}<br>
+             <hr>
+             Total Price: $${totalPrice}`;
+    }
+</script>
+
+</body>
+</html>
